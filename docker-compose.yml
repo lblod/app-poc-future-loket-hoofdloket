@@ -27,8 +27,6 @@ services:
     volumes:
       - ./config/openid:/config
   resource:
-    image: semtech/mu-cl-resources:1.22.2
-    links:
-      - database:database
+    image: semtech/mu-cl-resources:1.23.0
     volumes:
       - ./config/resources:/config
