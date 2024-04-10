@@ -5,12 +5,8 @@ services:
     image: semtech/mu-identifier:1.10.1
     environment:
       SESSION_COOKIE_SECURE: "on"
-    links:
-      - dispatcher:dispatcher
   dispatcher:
     image: semtech/mu-dispatcher:2.1.0-beta.2
-    links:
-      - resource:resource
     volumes:
       - ./config/dispatcher:/config
   database:
@@ -21,6 +17,15 @@ services:
     volumes:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
+  login:
+    image: lblod/acmidm-login-service:feature-jwt
+    environment:
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/op/"
+      MU_APPLICATION_AUTH_CLIENT_ID: "97b992e0-dcd6-41c2-8c3d-b6498b42d159"
+      MU_APPLICATION_AUTH_REDIRECT_URI: "https://future-loket-main.lblod.info/authorization/callback"
+      DEBUG_LOG_TOKENSETS: "true"
+    volumes:
+      - ./config/openid:/config
   resource:
     image: semtech/mu-cl-resources:1.22.2
     links:
