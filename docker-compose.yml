@@ -5,11 +5,16 @@ services:
     image: semtech/mu-identifier:1.10.1
     environment:
       SESSION_COOKIE_SECURE: "on"
+      DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"name\":\"public\", \"variables\":[]}]"
   dispatcher:
     image: semtech/mu-dispatcher:2.1.0-beta.2
     volumes:
       - ./config/dispatcher:/config
   database:
+    image: semtech/sparql-parser:latest
+    volumes:
+      - ./config/authorization:/config
+  triplestore:
     image: redpencil/virtuoso:1.2.0-rc.1
     environment:
       SPARQL_UPDATE: "true"
@@ -17,6 +22,10 @@ services:
     volumes:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
+  delta-notifier:
+    image: semtech/mu-delta-notifier:feature-deltas-with-only-effective-changes
+    volumes:
+      - ./config/delta:/config
   login:
     image: lblod/acmidm-login-service:0.12.0
     environment:
