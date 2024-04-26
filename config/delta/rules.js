@@ -1,7 +1,7 @@
 export default [
   {
     match: {
-      predicate: { type: 'uri', value: 'http://purl.org/dc/terms/isVersionOf' }
+
     },
     callback: {
       url: "http://resource/.mu/delta",
@@ -16,7 +16,7 @@ export default [
   },
   {
     match: {
-
+      predicate: { type: 'uri', value: 'http://purl.org/dc/terms/isVersionOf' }
     },
     callback: {
       url: "http://ldes-object/delta",
