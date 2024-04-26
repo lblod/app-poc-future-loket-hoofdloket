@@ -53,3 +53,23 @@ services:
       - ./config/resources:/config
     labels:
       - "logging=true"
+  ipdc-ldes-consumer:
+    image: redpencil/ldes-consumer:feature-use-streaming-backpressure
+    environment:
+      LDES_STREAM: "https://future-loket.lblod.info/ipdc-instance-feed"
+      LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot?pageNumber=0"
+      CRON_PATTERN: "*/10 * * * * *" # run the job every 10 seconds
+      LDES_POLLING_INTERVAL: 30000 # every 30 seconds
+      SAVE_ALL_VERSIONS_IGNORING_TIMESTAMP_DATA: "true"
+      REPLACE_VERSIONS: "false"
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
+      PERSIST_STATE: "true"
+    labels:
+      - "logging=true"
+  ldes-object:
+    image: lblod/ldes-make-object-service
+    environment:
+      LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
+      TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
+    labels:
+      - "logging=true"
