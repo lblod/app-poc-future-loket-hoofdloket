@@ -82,5 +82,6 @@ services:
     environment:
       LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
+      MAX_BODY_SIZE: "10mb"
     labels:
       - "logging=true"
