@@ -16,6 +16,21 @@ export default [
   },
   {
     match: {
+
+    },
+    callback: {
+      url: "http://uuid-generation/delta",
+      method: "POST"
+    },
+    options: {
+      resourceFormat: "v0.0.1",
+      gracePeriod: 250,
+      foldEffectiveChanges: true,
+      ignoreFromSelf: true
+    }
+  },
+  {
+    match: {
       predicate: { type: 'uri', value: 'http://purl.org/dc/terms/isVersionOf' }
     },
     callback: {

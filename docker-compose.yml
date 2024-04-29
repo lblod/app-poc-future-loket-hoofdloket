@@ -85,3 +85,7 @@ services:
       MAX_BODY_SIZE: "10mb"
     labels:
       - "logging=true"
+  uuid-generation:
+    image: redpencil/uuid-generation
+    volumes:
+      - ./config/uuid-generation/:/config
