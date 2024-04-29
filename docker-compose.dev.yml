@@ -2,6 +2,8 @@ version: '3.4'
 
 services:
   identifier:
+    environment:
+      LOG_ALLOWED_GROUPS: "on"
     ports:
       - "80:80"
   triplestore:
