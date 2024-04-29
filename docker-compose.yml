@@ -18,6 +18,7 @@ services:
     image: semtech/sparql-parser:latest
     volumes:
       - ./config/authorization:/config
+      - ./data/authorization:/data
     labels:
       - "logging=true"
   triplestore:
