@@ -6,7 +6,7 @@
 (setf *cache-model-properties-p* t)
 
 ;; reading in the domain.json
-(read-domain-file "domain.json")
+;;(read-domain-file "domain.json")
 
 (define-resource concept-scheme ()
   :class (s-prefix "skos:ConceptScheme")
@@ -34,8 +34,8 @@
   :on-path "concepts"
   )
 
-(define-resource public-service
-  :class (s-prefix "ipdc:InstancePublicService")
+(define-resource public-service ()
+  :class (s-prefix "ipdc:InstancePublicServiceSnapshot")
   :properties `((:name :language-string-set ,(s-prefix "dct:title"))
                 (:description :language-string-set ,(s-prefix "dct:description"))
                 (:additional-description :language-string-set ,(s-prefix "ipdc:additionalDescription"))
