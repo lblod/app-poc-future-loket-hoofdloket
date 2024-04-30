@@ -14,6 +14,12 @@ services:
       - ./config/dispatcher:/config
     labels:
       - "logging=true"
+  frontend:
+    image: lblod/frontend-poc-future-loket-hoofdloket:feature-ipdc-integration
+    links:
+      - identifier:backend
+    labels:
+      - "logging=true"
   database:
     image: semtech/sparql-parser:latest
     volumes:

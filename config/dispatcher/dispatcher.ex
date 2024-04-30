@@ -2,38 +2,58 @@ defmodule Dispatcher do
   use Matcher
   define_accept_types [
     html: [ "text/html", "application/xhtml+html" ],
-    json: [ "application/json", "application/vnd.api+json" ]
+    json: [ "application/json", "application/vnd.api+json" ],
+    any: [ "*/*" ]
   ]
 
-  @any %{}
-  @json %{ accept: %{ json: true } }
-  @html %{ accept: %{ html: true } }
+  define_layers [ :static, :web_page, :api_services, :not_found ]
 
-  define_layers [ :static, :services, :fall_back, :not_found ]
-
-  # In order to forward the 'themes' resource to the
-  # resource service, use the following forward rule:
-  #
-  # match "/themes/*path", @json do
-  #   Proxy.forward conn, path, "http://resource/themes/"
-  # end
-  #
-  # Run `docker-compose restart dispatcher` after updating
-  # this file.
-
-  match "/sessions/*path", @json do
-    Proxy.forward conn, path, "http://login/sessions/"
+  ###############
+  # STATIC
+  ###############
+  get "/assets/*path", %{ layer: :static } do
+    forward conn, path, "http://frontend/assets/"
   end
 
-  get "/public-services/*path", @json do
+  get "/favicon.ico", %{ layer: :static } do
+    send_resp( conn, 404, "" )
+  end
+
+  #################
+  # FRONTEND PAGES
+  #################
+  get "/*path", %{ layer: :web_page, accept: %{ html: true } } do
+    forward conn, [], "http://frontend/index.html"
+  end
+
+  ###############
+  # API SERVICES
+  ###############
+  post "/sessions", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, [], "http://login/sessions"
+  end
+
+  get "/sessions/current", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, [], "http://login/sessions/current"
+  end
+
+  delete "/sessions/current", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, [], "http://login/sessions/current"
+  end
+
+  get "/public-services/*path", %{ layer: :api_services, accept: %{ json: true } } do
     Proxy.forward conn, path, "http://resource/public-services/"
   end
 
-  get "/concepts/*path", @json do
+  get "/concepts/*path", %{ layer: :api_services, accept: %{ json: true } } do
     Proxy.forward conn, path, "http://resource/concepts/"
   end
 
+  #################
+  # NOT FOUND
+  #################
   match "/*_", %{ layer: :not_found } do
     send_resp( conn, 404, "Route not found.  See config/dispatcher.ex" )
   end
+
 end
