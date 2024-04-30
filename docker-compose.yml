@@ -1,23 +1,36 @@
 version: '3.4'
 
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   identifier:
     image: semtech/mu-identifier:1.10.1
     environment:
       SESSION_COOKIE_SECURE: "on"
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"name\":\"public\", \"variables\":[]}]"
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   dispatcher:
     image: semtech/mu-dispatcher:2.1.0-beta.2
     volumes:
       - ./config/dispatcher:/config
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   frontend:
     image: lblod/frontend-poc-future-loket-hoofdloket:feature-ipdc-integration
     links:
       - identifier:backend
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   database:
@@ -25,6 +38,8 @@ services:
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   triplestore:
@@ -35,12 +50,16 @@ services:
     volumes:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   delta-notifier:
     image: semtech/mu-delta-notifier:feature-deltas-with-only-effective-changes
     volumes:
       - ./config/delta:/config
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   migrations:
@@ -51,6 +70,8 @@ services:
       - triplestore:database
     volumes:
       - ./config/migrations:/data/migrations
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   login:
@@ -62,12 +83,16 @@ services:
       DEBUG_LOG_TOKENSETS: "true"
     volumes:
       - ./config/openid:/config
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   resource:
     image: semtech/mu-cl-resources:1.23.0
     volumes:
       - ./config/resources:/config
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   ipdc-ldes-consumer:
@@ -81,6 +106,8 @@ services:
       REPLACE_VERSIONS: "false"
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       PERSIST_STATE: "true"
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   ldes-object:
@@ -89,9 +116,15 @@ services:
       LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
       MAX_BODY_SIZE: "10mb"
+    restart: always
+    logging: *default-logging
     labels:
       - "logging=true"
   uuid-generation:
     image: redpencil/uuid-generation
     volumes:
       - ./config/uuid-generation/:/config
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
