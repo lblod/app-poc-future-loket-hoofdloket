@@ -15,6 +15,10 @@ defmodule Dispatcher do
     forward conn, path, "http://frontend/assets/"
   end
 
+  get "/@appuniversum/*path", %{ layer: :static } do
+    forward conn, path, "http://frontend/@appuniversum/"
+  end
+
   get "/favicon.ico", %{ layer: :static } do
     send_resp( conn, 404, "" )
   end
