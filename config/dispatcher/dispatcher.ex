@@ -46,11 +46,11 @@ defmodule Dispatcher do
   end
 
   get "/public-services/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://resource/public-services/"
+    Proxy.forward conn, path, "http://cache/public-services/"
   end
 
   get "/concepts/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://resource/concepts/"
+    Proxy.forward conn, path, "http://cache/concepts/"
   end
 
   #################

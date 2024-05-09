@@ -87,8 +87,18 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  cache:
+    image: semtech/mu-cache:2.0.2
+    links:
+    - resource:backend
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
   resource:
     image: semtech/mu-cl-resources:1.23.0
+    environment:
+      CACHE_CLEAR_PATH: "http://resourcecache/.mu/clear-keys"
     volumes:
       - ./config/resources:/config
     restart: always
