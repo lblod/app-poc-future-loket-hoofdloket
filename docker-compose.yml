@@ -121,10 +121,11 @@ services:
     labels:
       - "logging=true"
   ldes-object:
-    image: lblod/ldes-make-object-service
+    image: lblod/ldes-make-object-service:feature-deep-copy-blank-nodes
     environment:
       LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
+      DEEP_COPY_BLANK_NODES: "true"
       MAX_BODY_SIZE: "10mb"
     restart: always
     logging: *default-logging
