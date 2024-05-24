@@ -96,7 +96,7 @@ services:
     labels:
       - "logging=true"
   resource:
-    image: semtech/mu-cl-resources:1.23.0
+    image: semtech/mu-cl-resources:1.24.0
     environment:
       CACHE_CLEAR_PATH: "http://resourcecache/.mu/clear-keys"
     volumes:
