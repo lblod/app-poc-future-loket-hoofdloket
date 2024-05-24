@@ -62,8 +62,21 @@
                (concept :via ,(s-prefix "ipdc:competentAuthorityLevel")
                  :as "competent-authority-levels")
                (concept :via ,(s-prefix "ipdc:executingAuthorityLevel")
-                 :as "executing-authority-levels"))
+                 :as "executing-authority-levels")
+               (website :via ,(s-prefix "rdfs:seeAlso")
+                 :as "websites"))
   :resource-base (s-url "http://data.lblod.info/id/public-service/")
   :features '(include-uri)
   :on-path "public-services"
-)
+  )
+
+(define-resource website ()
+  :class (s-prefix "schema:WebSite")
+  :properties `((:title :language-string-set ,(s-prefix "dct:title"))
+                 (:description :language-string-set ,(s-prefix "dct:description"))
+                 (:url :string ,(s-prefix "schema:url")))
+  :has-one `((public-service :via ,(s-prefix "rdfs:seeAlso")
+               :inverse t
+               :as "public-service"))
+  :resource-base (s-url "http://lblod.data.gift/websites/")
+  :on-path "websites")

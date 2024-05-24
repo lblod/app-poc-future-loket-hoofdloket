@@ -53,6 +53,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/concepts/"
   end
 
+  get "/websites/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    Proxy.forward conn, path, "http://cache/websites/"
+  end
+
   #################
   # NOT FOUND
   #################
