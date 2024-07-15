@@ -139,3 +139,11 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  uri-info:
+    image: redpencil/mu-uri-info-service:0.2.1
+  resource-labels-cache:
+    image: semtech/mu-cache:2.0.2
+    links:
+      - resource-labels:backend
+  resource-labels:
+    image: lblod/resource-label-service:0.3.2

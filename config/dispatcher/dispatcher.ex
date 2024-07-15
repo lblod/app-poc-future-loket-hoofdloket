@@ -57,6 +57,14 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/websites/"
   end
 
+  get "/uri-info/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://uri-info/"
+  end
+
+  get "/resource-labels/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://resource-labels-cache/"
+  end
+
   #################
   # NOT FOUND
   #################
