@@ -147,3 +147,5 @@ services:
       - resource-labels:backend
   resource-labels:
     image: lblod/resource-label-service:0.3.2
+    environment:
+      DEFAULT_LANGUAGE: 'nil'
