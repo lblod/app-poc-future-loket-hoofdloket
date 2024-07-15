@@ -33,8 +33,15 @@
 (define-graph public ("http://mu.semte.ch/graphs/public")
   (_ -> _))
 
+(define-graph vocabularies ("http://mu.semte.ch/graphs/vocabularies")
+  (_ -> _))
+
 (supply-allowed-group "public")
 
 (grant (read write)
   :to-graph (public)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (vocabularies)
   :for-allowed-group "public")
