@@ -26,7 +26,7 @@ services:
     labels:
       - "logging=true"
   frontend:
-    image: lblod/frontend-poc-future-loket-hoofdloket:feature-ipdc-integration
+    image: lblod/frontend-poc-future-loket-hoofdloket:latest
     links:
       - identifier:backend
     restart: always
