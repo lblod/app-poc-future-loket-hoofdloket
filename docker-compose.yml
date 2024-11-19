@@ -34,7 +34,7 @@ services:
     labels:
       - "logging=true"
   database:
-    image: semtech/sparql-parser:latest
+    image: semtech/sparql-parser:0.0.10
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
@@ -96,7 +96,7 @@ services:
     labels:
       - "logging=true"
   resource:
-    image: semtech/mu-cl-resources:1.24.0
+    image: semtech/mu-cl-resources:1.25.0
     environment:
       CACHE_CLEAR_PATH: "http://resourcecache/.mu/clear-keys"
     volumes:
@@ -121,7 +121,7 @@ services:
     labels:
       - "logging=true"
   ldes-object:
-    image: lblod/ldes-make-object-service:feature-deep-copy-blank-nodes
+    image: lblod/ldes-make-object-service:latest
     environment:
       LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
