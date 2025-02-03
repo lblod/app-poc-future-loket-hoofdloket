@@ -118,6 +118,7 @@ services:
       REPLACE_VERSIONS: "true" # default
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       PERSIST_STATE: "true"
+      RUNONCE: "false"
       # Fill in the below in a override file :)
       # LDES_ENDPOINT_HEADERS: >
       #   {
