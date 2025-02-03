@@ -140,7 +140,7 @@ services:
     labels:
       - "logging=true"
   uuid-generation:
-    image: redpencil/uuid-generation:0.3.0
+    image: redpencil/uuid-generation:0.3.1
     volumes:
       - ./config/uuid-generation/:/config
     restart: always
