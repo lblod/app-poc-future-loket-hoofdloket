@@ -23,7 +23,23 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-  frontend:
+  frontend-design: # most incomplete
+    image: lblod/frontend-poc-future-loket-hoofdloket:design
+    links:
+      - identifier:backend
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  frontend-development: # probably works
+    image: lblod/frontend-poc-future-loket-hoofdloket:development
+    links:
+      - identifier:backend
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  frontend: # can be demoed
     image: lblod/frontend-poc-future-loket-hoofdloket:latest
     links:
       - identifier:backend

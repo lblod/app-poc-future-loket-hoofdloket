@@ -8,9 +8,46 @@ defmodule Dispatcher do
 
   define_layers [ :static, :web_page, :api_services, :not_found ]
 
-  ###############
-  # STATIC
-  ###############
+  #########################
+  # STATIC & FRONTEND PAGES
+  #########################
+
+  get "/favicon.ico", %{ layer: :static } do
+    send_resp( conn, 404, "" )
+  end
+
+  # This section is available three times: [ design, development, general ]
+  # once we are out of the development stage of the frontend, the distinction will shift away
+
+  # design branch
+
+  get "/assets/*path", %{ layer: :static, reverse_host: ["design" | _rest ] } do
+    forward conn, path, "http://frontend-design/assets/"
+  end
+
+  get "/@appuniversum/*path", %{ layer: :static, reverse_host: ["design" | _rest ] } do
+    forward conn, path, "http://frontend-design/@appuniversum/"
+  end
+
+  get "/*path", %{ layer: :web_page, accept: %{ html: true }, reverse_host: ["design" | _rest ] } do
+    forward conn, [], "http://frontend-design/index.html"
+  end
+
+  # development branch
+
+  get "/assets/*path", %{ layer: :static, reverse_host: ["dev" | _rest ] } do
+    forward conn, path, "http://frontend-development/assets/"
+  end
+
+  get "/@appuniversum/*path", %{ layer: :static, reverse_host: ["dev" | _rest ] } do
+    forward conn, path, "http://frontend-development/@appuniversum/"
+  end
+
+  get "/*path", %{ layer: :web_page, accept: %{ html: true }, reverse_host: ["dev" | _rest ] } do
+    forward conn, [], "http://frontend-development/index.html"
+  end
+
+  # latest / production -- NOTE: this is last so we don't have to introduce another layer
   get "/assets/*path", %{ layer: :static } do
     forward conn, path, "http://frontend/assets/"
   end
@@ -19,16 +56,10 @@ defmodule Dispatcher do
     forward conn, path, "http://frontend/@appuniversum/"
   end
 
-  get "/favicon.ico", %{ layer: :static } do
-    send_resp( conn, 404, "" )
-  end
-
-  #################
-  # FRONTEND PAGES
-  #################
   get "/*path", %{ layer: :web_page, accept: %{ html: true } } do
     forward conn, [], "http://frontend/index.html"
   end
+
 
   ###############
   # API SERVICES
