@@ -120,21 +120,15 @@ services:
     labels:
       - "logging=true"
   ipdc-ldes-consumer:
-    image: redpencil/ldes-consumer:feature-rdf-connect-ldes-client
+    image: redpencil/ldes-consumer:0.9.0
     volumes:
       - ./data/ldes-consumer:/data
     environment:
-      # LDES_STREAM: "https://future-loket.lblod.info/ipdc-instance-feed" # State is not stored in a file
       LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot?limit=25&pageNumber=0"
-      # CRON_PATTERN: "*/10 * * * * *" # run the job every 10 seconds # unused in new verison
-      LDES_POLLING_INTERVAL: 30000 # every 30 seconds
-      LOG_LEVEL: "debug" # I think this will achieve the same as below?
-      # LDES_LOGGING_LEVEL: "debug"
-      INGEST_MODE: "ALL" # default
       REPLACE_VERSIONS: "true" # default
-      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       PERSIST_STATE: "true"
-      RUNONCE: "false"
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
+      LOG_LEVEL: "debug"
       # Fill in the below in a override file :)
       # LDES_ENDPOINT_HEADERS: >
       #   {
@@ -145,7 +139,7 @@ services:
     labels:
       - "logging=true"
   ldes-object:
-    image: lblod/ldes-make-object-service:latest
+    image: lblod/ldes-make-object-service:0.1.2
     environment:
       LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       TARGET_GRAPH: "http://mu.semte.ch/graphs/public"
