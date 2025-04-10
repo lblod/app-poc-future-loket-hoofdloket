@@ -1,0 +1,96 @@
+{
+  "persist_indexes": true,
+  "additive_indexes": true,
+  "number_of_threads": 8,
+  "batch_size": 128,
+  "max_batches": 0,
+  "update_wait_interval_minutes": 0,
+  "automatic_index_updates": true,
+  "eager_indexing_groups": [
+    [
+      { "name": "public", "variables": [] }
+    ]
+  ],
+  "types" : [
+    {
+      "type" : "public-service",
+      "on_path" : "public-services",
+      "rdf_type" : "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#InstancePublicServiceSnapshot",
+      "properties" : {
+        "title": {
+          "via": "http://purl.org/dc/terms/title",
+          "type": "language-string"
+        },
+        "description": {
+          "via": "http://purl.org/dc/terms/description",
+          "type": "language-string"
+        },
+        "startDate": "http://schema.org/startDate",
+        "endDate": "http://schema.org/endDate",
+        "dateCreated": "http://schema.org/dateCreated",
+        "dateModified": "http://schema.org/dateModified"
+      },
+      "mappings": {
+        "properties": {
+          "title": {
+            "properties": {
+              "nl": {
+                "type": "keyword",
+                "normalizer": "names"
+              }
+            }
+          },
+          "description":  {
+            "properties": {
+              "nl": {
+                "type": "text",
+                "analyzer": "rebuilt_dutch"
+              }
+            }
+          },
+          "startDate": { "type": "date" },
+          "endDate": { "type": "date" },
+          "dateCreated": { "type": "date" },
+          "dateModified": { "type": "date" }
+        }
+      }
+    }
+  ],
+  "default_settings": {
+    "analysis": {
+      "normalizer": {
+        "names": {
+          "filter": [
+            "asciifolding",
+            "lowercase",
+            "trim"
+          ]
+        }
+      },
+      "filter": {
+        "dutch_stemmer": {
+          "type": "stemmer",
+          "language": "dutch"
+        }
+      },
+      "analyzer": {
+        "names": {
+          "tokenizer": "standard",
+          "filter": [
+            "asciifolding",
+            "lowercase",
+            "trim"
+          ]
+        },
+        "rebuilt_dutch": {
+          "tokenizer": "standard",
+          "filter": [
+            "asciifolding",
+            "lowercase",
+            "dutch_stemmer"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -64,6 +64,10 @@ defmodule Dispatcher do
   ###############
   # API SERVICES
   ###############
+  get "/search/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://search/"
+  end
+
   post "/sessions", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, [], "http://login/sessions"
   end

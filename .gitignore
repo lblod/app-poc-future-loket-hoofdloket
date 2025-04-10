@@ -5,6 +5,8 @@
 !/data/db/toLoad/*
 
 /data/authorization/*
+/data/elasticsearch/*
+/config/search/*.store
 
 docker-compose.override.yml
 config/openid/jwk_private_key.json
