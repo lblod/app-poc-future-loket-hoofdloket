@@ -5,6 +5,7 @@
 !/data/db/toLoad/*
 
 /data/authorization/*
+/data/ldes-consumer/*
 /data/elasticsearch/*
 /config/search/*.store
 

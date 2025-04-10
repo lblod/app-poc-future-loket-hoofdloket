@@ -143,7 +143,7 @@ services:
       - ./data/ldes-consumer:/data
     environment:
       LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot?limit=25&pageNumber=0"
-      REPLACE_VERSIONS: "true" # default
+      REPLACE_VERSIONS: "false" # default
       PERSIST_STATE: "true"
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
       LOG_LEVEL: "debug"
