@@ -5,6 +5,7 @@
 !/data/db/toLoad/*
 
 /data/authorization/*
+/data/ldes-consumer/*
 
 docker-compose.override.yml
 config/openid/jwk_private_key.json
