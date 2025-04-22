@@ -17,7 +17,7 @@
       "on_path" : "public-services",
       "rdf_type" : "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#InstancePublicServiceSnapshot",
       "properties" : {
-        "title": {
+        "name": {
           "via": "http://purl.org/dc/terms/title",
           "type": "language-string"
         },
@@ -28,11 +28,50 @@
         "startDate": "http://schema.org/startDate",
         "endDate": "http://schema.org/endDate",
         "dateCreated": "http://schema.org/dateCreated",
-        "dateModified": "http://schema.org/dateModified"
+        "dateModified": "http://schema.org/dateModified",
+        "type": {
+          "via": "http://purl.org/dc/terms/type",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "broader": {
+              "via": "^http://www.w3.org/2004/02/skos/core#narrower",
+              "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+              "properties": {
+                "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+              }
+            }
+          }
+        },
+        "thematicAreas": {
+          "via": "http://data.europa.eu/m8g/thematicArea",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "broader": {
+              "via": "^http://www.w3.org/2004/02/skos/core#narrower",
+              "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+              "properties": {
+                "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+              }
+            }
+          }
+        },
+        "competentAuthorityLevels": {
+          "via": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#competentAuthorityLevel",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "broader": {
+              "via": "^http://www.w3.org/2004/02/skos/core#narrower",
+              "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+              "properties": {
+                "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+              }
+            }
+          }
+        }
       },
       "mappings": {
         "properties": {
-          "title": {
+          "name": {
             "properties": {
               "nl": {
                 "type": "keyword",
@@ -51,7 +90,13 @@
           "startDate": { "type": "date" },
           "endDate": { "type": "date" },
           "dateCreated": { "type": "date" },
-          "dateModified": { "type": "date" }
+          "dateModified": { "type": "date" },
+          "type.label": { "type": "keyword" },
+          "type.broader.label": { "type": "keyword" },
+          "thematicAreas.label": { "type": "keyword" },
+          "thematicAreas.broader.label": { "type": "keyword" },
+          "competentAuthorityLevels.label": { "type": "keyword" },
+          "competentAuthorityLevels.broader.label": { "type": "keyword" }
         }
       }
     }

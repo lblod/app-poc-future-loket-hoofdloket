@@ -64,10 +64,6 @@ defmodule Dispatcher do
   ###############
   # API SERVICES
   ###############
-  get "/search/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    forward conn, path, "http://search/"
-  end
-
   post "/sessions", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, [], "http://login/sessions"
   end
@@ -80,16 +76,20 @@ defmodule Dispatcher do
     forward conn, [], "http://login/sessions/current"
   end
 
+  get "/public-services/search/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://search/public-services/search/"
+  end
+
   get "/public-services/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://cache/public-services/"
+    forward conn, path, "http://cache/public-services/"
   end
 
   get "/concepts/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://cache/concepts/"
+    forward conn, path, "http://cache/concepts/"
   end
 
   get "/websites/*path", %{ layer: :api_services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://cache/websites/"
+    forward conn, path, "http://cache/websites/"
   end
 
   get "/uri-info/*path", %{ layer: :api_services, accept: %{ json: true } } do
