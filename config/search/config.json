@@ -67,6 +67,12 @@
               }
             }
           }
+        },
+        "targetAudiences": {
+          "via": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#targetAudience",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+          }
         }
       },
       "mappings": {
