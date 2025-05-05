@@ -68,6 +68,19 @@
             }
           }
         },
+        "executingAuthorityLevels": {
+          "via": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#executingAuthorityLevel",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "broader": {
+              "via": "^http://www.w3.org/2004/02/skos/core#narrower",
+              "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+              "properties": {
+                "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+              }
+            }
+          }
+        },
         "targetAudiences": {
           "via": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#targetAudience",
           "properties": {
@@ -80,8 +93,14 @@
           "name": {
             "properties": {
               "nl": {
-                "type": "keyword",
-                "normalizer": "names"
+                "type": "text",
+                "analyzer": "rebuilt_dutch",
+                "fields": {
+                  "raw": {
+                    "type": "keyword",
+                    "normalizer": "names"
+                  }
+                }
               }
             }
           },
