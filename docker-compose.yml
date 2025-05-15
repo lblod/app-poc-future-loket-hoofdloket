@@ -142,7 +142,7 @@ services:
     volumes:
       - ./data/ldes-consumer:/data
     environment:
-      LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot?limit=25&pageNumber=0"
+      LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot"
       INGEST_MODE: "MATERIALIZE"
       REPLACE_VERSIONS: "true" # default
       PERSIST_STATE: "true"
