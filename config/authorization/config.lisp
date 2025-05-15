@@ -28,20 +28,39 @@
 (defparameter *rights* nil
   "All known GRANT instances connecting ACCESS-SPECIFICATION to GRAPH.")
 
+(define-prefixes
+  :cpsv "http://purl.org/vocab/cpsv#"
+  :dct "http://purl.org/dc/terms/"
+  :eli "http://data.europa.eu/eli/ontology#"
+  :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
+  :locn "http://www.w3.org/ns/locn#"
+  :m8g "http://data.europa.eu/m8g/"
+  :schema "http://schema.org/"
+  :skos "http://www.w3.org/2004/02/skos/core#")
+
 (type-cache::add-type-for-prefix "http://mu.semte.ch/sessions/" "http://mu.semte.ch/vocabularies/session/Session")
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
-  (_ -> _))
+  ("skos:Concept" -> _)
+  ("skos:ConceptScheme" -> _))
 
 (define-graph vocabularies ("http://mu.semte.ch/graphs/vocabularies")
   (_ -> _))
 
+(define-graph ipdc ("http://mu.semte.ch/graphs/ipdc/ldes-data")
+  ("ipdc:InstancePublicServiceSnapshot" -> _)
+  ("ipdc:FinancialAdvantage" -> _)
+  ("schema:WebSite" -> _)
+  ("m8g:Requirement" -> _)
+  ("m8g:Cost" -> _)
+  ("m8g:Evidence" -> _)
+  ("schema:ContactPoint" -> _)
+  ("locn:Address" -> _)
+  ("cpsv:Rule" -> _)
+  ("eli:LegalResource" -> _))
+
 (supply-allowed-group "public")
 
-(grant (read write)
-  :to-graph (public)
-  :for-allowed-group "public")
-
 (grant (read)
-  :to-graph (vocabularies)
+  :to-graph (public ipdc vocabularies)
   :for-allowed-group "public")
