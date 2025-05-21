@@ -6,7 +6,7 @@
 (setf *cache-model-properties-p* t)
 
 ;; reading in the domain.json
-;;(read-domain-file "domain.json")
+(read-domain-file "users.lisp")
 
 (define-resource concept-scheme ()
   :class (s-prefix "skos:ConceptScheme")
@@ -32,7 +32,7 @@
               (concept :via ,(s-prefix "skos:narrower")
                        :as "narrower")
               (concept :via ,(s-prefix "skos:narrower")
-                       :inverse t         
+                       :inverse t
                        :as "broader"))
   :resource-base (s-url "http://lblod.data.gift/concepts/")
   :features `(include-uri)

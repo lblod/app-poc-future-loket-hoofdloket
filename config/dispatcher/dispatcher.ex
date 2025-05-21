@@ -64,6 +64,10 @@ defmodule Dispatcher do
   ###############
   # API SERVICES
   ###############
+  match "/mock/sessions/*path" do
+    forward conn, path, "http://mock-login/sessions/"
+  end
+
   post "/sessions", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, [], "http://login/sessions"
   end
@@ -82,6 +86,14 @@ defmodule Dispatcher do
 
   get "/public-services/*path", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, path, "http://cache/public-services/"
+  end
+
+  get "/accounts/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://cache/accounts/"
+  end
+
+  get "/administrative-units/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://cache/administrative-units/"
   end
 
   get "/concepts/*path", %{ layer: :api_services, accept: %{ json: true } } do

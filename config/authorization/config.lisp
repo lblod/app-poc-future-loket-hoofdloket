@@ -29,10 +29,14 @@
   "All known GRANT instances connecting ACCESS-SPECIFICATION to GRAPH.")
 
 (define-prefixes
+  :besluit "http://data.vlaanderen.be/ns/besluit#"
   :cpsv "http://purl.org/vocab/cpsv#"
   :dct "http://purl.org/dc/terms/"
   :eli "http://data.europa.eu/eli/ontology#"
+  :ext "http://mu.semte.ch/vocabularies/ext/"
+  :foaf "http://xmlns.com/foaf/0.1/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
+  :lblodorg "http://lblod.data.gift/vocabularies/organisatie/"
   :locn "http://www.w3.org/ns/locn#"
   :m8g "http://data.europa.eu/m8g/"
   :schema "http://schema.org/"
@@ -42,7 +46,11 @@
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("skos:Concept" -> _)
-  ("skos:ConceptScheme" -> _))
+  ("skos:ConceptScheme" -> _)
+  ("besluit:Bestuurseenheid" -> _)
+  ("lblodorg:BestuurseenheidClassificatieCode" -> _)
+  ("foaf:Person" -> _)
+  ("foaf:OnlineAccount" -> _))
 
 (define-graph vocabularies ("http://mu.semte.ch/graphs/vocabularies")
   (_ -> _))

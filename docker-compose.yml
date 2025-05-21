@@ -175,6 +175,12 @@ services:
     image: lblod/resource-label-service:0.3.2
     environment:
       DEFAULT_LANGUAGE: 'nil'
+  mock-login:
+    image: lblod/mock-login-service:0.5.0
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   op-public-consumer:
     image: lblod/delta-consumer:0.1.4
     environment:
