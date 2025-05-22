@@ -147,6 +147,7 @@ services:
       REPLACE_VERSIONS: "true" # default
       PERSIST_STATE: "true"
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
+      NODE_OPTIONS: "--max-old-space-size=8192"
       LOG_LEVEL: "debug"
       # Fill in the below in a override file :)
       # LDES_ENDPOINT_HEADERS: >
