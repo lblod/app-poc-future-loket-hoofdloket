@@ -158,7 +158,7 @@ services:
     labels:
       - "logging=true"
   uuid-generation:
-    image: redpencil/uuid-generation:0.4.0
+    image: redpencil/uuid-generation:0.4.1
     volumes:
       - ./config/uuid-generation/:/config
     restart: always
