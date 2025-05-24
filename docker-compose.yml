@@ -158,6 +158,8 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  ipdc-bookmarks:
+    image: lblod/ipdc-bookmarks-service:0.1.0
   uuid-generation:
     image: redpencil/uuid-generation:0.4.1
     volumes:

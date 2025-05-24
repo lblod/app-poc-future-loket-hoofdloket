@@ -84,6 +84,18 @@ defmodule Dispatcher do
     forward conn, path, "http://search/public-services/search/"
   end
 
+  get "/bookmarks/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://ipdc-bookmarks/bookmarks/"
+  end
+
+  post "/public-services/:id/bookmarks", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, [], "http://ipdc-bookmarks/public-services/" <> id <> "/bookmarks"
+  end
+
+  delete "/bookmarks/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://ipdc-bookmarks/bookmarks/"
+  end
+
   get "/public-services/*path", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, path, "http://cache/public-services/"
   end
