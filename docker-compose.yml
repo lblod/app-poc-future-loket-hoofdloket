@@ -143,10 +143,13 @@ services:
       - ./data/ldes-consumer:/data
     environment:
       LDES_ENDPOINT_VIEW: "https://ipdc.tni-vlaanderen.be/doc/instantiesnapshot"
-      INGEST_MODE: "MATERIALIZE"
-      REPLACE_VERSIONS: "true" # default
-      PERSIST_STATE: "true"
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/ipdc/ldes-data"
+      INGEST_MODE: "MATERIALIZE"
+      REPLACE_VERSIONS: "true"
+      PERSIST_STATE: "true"
+      SPARQL_BATCH_SIZE: "500"
+      SUDO_QUERY_RETRY: "true"
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
       NODE_OPTIONS: "--max-old-space-size=8192"
       LOG_LEVEL: "debug"
       # Fill in the below in a override file :)
