@@ -161,7 +161,10 @@ services:
   ipdc-bookmarks:
     image: lblod/ipdc-bookmarks-service:0.1.0
   uuid-generation:
-    image: redpencil/uuid-generation:0.4.1
+    image: redpencil/uuid-generation:0.4.0
+    environment:
+      RUN_CRON_JOBS: "true"
+      CRON_FREQUENCY: "* */1 * * *" # every minute
     volumes:
       - ./config/uuid-generation/:/config
     restart: always
