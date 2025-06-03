@@ -49,6 +49,7 @@
                 (:exceptions :language-string-set ,(s-prefix "ipdc:exception"))
                 (:start-date :datetime ,(s-prefix "schema:startDate"))
                 (:end-date :datetime ,(s-prefix "schema:endDate"))
+                (:is-archived :boolean ,(s-prefix "ipdc:isArchived"))
                 (:date-created :datetime ,(s-prefix "schema:dateCreated"))
                 (:date-modified :datetime ,(s-prefix "schema:dateModified"))
                 (:product-id :string ,(s-prefix "schema:productID"))

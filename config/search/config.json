@@ -29,6 +29,7 @@
         "endDate": "http://schema.org/endDate",
         "dateCreated": "http://schema.org/dateCreated",
         "dateModified": "http://schema.org/dateModified",
+        "isArchived": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#isArchived",
         "type": {
           "via": "http://purl.org/dc/terms/type",
           "properties": {
@@ -116,6 +117,7 @@
           "endDate": { "type": "date" },
           "dateCreated": { "type": "date" },
           "dateModified": { "type": "date" },
+          "isArchived": { "type": "boolean" },
           "type.label": { "type": "keyword" },
           "type.broader.label": { "type": "keyword" },
           "thematicAreas.label": { "type": "keyword" },
