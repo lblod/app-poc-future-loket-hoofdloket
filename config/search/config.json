@@ -124,6 +124,14 @@
           "thematicAreas.broader.label": { "type": "keyword" },
           "competentAuthorityLevels.label": { "type": "keyword" },
           "competentAuthorityLevels.broader.label": { "type": "keyword" }
+        },
+        "runtime": {
+          "filterEndDate": {
+            "type": "date",
+            "script": {
+              "source": "if (doc['endDate'].size() > 0) { emit(doc['endDate'].value.toInstant().toEpochMilli()); } else { long thousandYearMillis = 1000*365*24*60*60*1000L; emit (System.currentTimeMillis() + thousandYearMillis); }"
+            }
+          }
         }
       }
     }
