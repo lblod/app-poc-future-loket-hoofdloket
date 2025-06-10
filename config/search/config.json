@@ -56,6 +56,19 @@
             }
           }
         },
+        "competentAuthority": {
+          "via": "http://data.europa.eu/m8g/hasCompetentAuthority",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "broader": {
+              "via": "^http://www.w3.org/2004/02/skos/core#narrower",
+              "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+              "properties": {
+                "label": "http://www.w3.org/2004/02/skos/core#prefLabel"
+              }
+            }
+          }
+        },
         "competentAuthorityLevels": {
           "via": "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#competentAuthorityLevel",
           "properties": {
