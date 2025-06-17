@@ -112,7 +112,7 @@ services:
   resource:
     image: semtech/mu-cl-resources:1.25.0
     environment:
-      CACHE_CLEAR_PATH: "http://resourcecache/.mu/clear-keys"
+      CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     volumes:
       - ./config/resources:/config
     restart: always
