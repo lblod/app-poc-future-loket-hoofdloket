@@ -8,7 +8,7 @@
 ;;;;;;;;;;;;;;;;;
 ;;; configuration
 (in-package :client)
-(setf *log-sparql-query-roundtrip* t)
+(setf *log-sparql-query-roundtrip* nil)
 (setf *backend* "http://triplestore:8890/sparql")
 
 (in-package :server)
