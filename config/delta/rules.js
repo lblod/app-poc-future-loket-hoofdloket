@@ -39,8 +39,9 @@ export default [
     options: {
       resourceFormat: 'v0.0.1',
       gracePeriod: 250,
-      foldEffectiveChanges: true,
-      ignoreFromSelf: true
+      foldEffectiveChanges: false,
+      ignoreFromSelf: true,
+      _comment: "We explicitly don't want to fold effective changes, since uuid-generation service only handles on inserts with pattern '?s a <type-uri>'"
     }
   }
 ];
