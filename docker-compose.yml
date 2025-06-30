@@ -48,9 +48,7 @@ services:
     labels:
       - "logging=true"
   database:
-    image: semtech/sparql-parser:0.0.14
-    environment:
-      LISP_DYNAMIC_SPACE_SIZE: 4096
+    image: semtech/sparql-parser:feature-various-data-writers
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
