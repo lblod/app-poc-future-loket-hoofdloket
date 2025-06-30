@@ -45,7 +45,7 @@ variables are missing this will not lead to a pattern."
 ;;; delta messenger
 (in-package :delta-messenger)
 
-(add-delta-logger)
+;;(add-delta-logger)
 (add-delta-messenger "http://delta-notifier/")
 
 ;;;;;;;;;;;;;;;;;
