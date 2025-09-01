@@ -100,6 +100,10 @@ defmodule Dispatcher do
     forward conn, path, "http://cache/public-services/"
   end
 
+  get "/procedures/*path", %{ layer: :api_services, accept: %{ json: true } } do
+    forward conn, path, "http://cache/procedures/"
+  end
+
   get "/accounts/*path", %{ layer: :api_services, accept: %{ json: true } } do
     forward conn, path, "http://cache/accounts/"
   end

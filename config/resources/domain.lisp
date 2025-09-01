@@ -71,7 +71,9 @@
                (concept :via ,(s-prefix "ipdc:executingAuthorityLevel")
                  :as "executing-authority-levels")
                (website :via ,(s-prefix "rdfs:seeAlso")
-                 :as "websites"))
+                 :as "websites")
+               (procedure :via ,(s-prefix "cpsv:follows")
+                 :as "procedures"))
   :resource-base (s-url "http://data.lblod.info/id/public-service/")
   :features '(include-uri)
   :on-path "public-services"
@@ -84,6 +86,21 @@
                  (:url :string ,(s-prefix "schema:url")))
   :has-one `((public-service :via ,(s-prefix "rdfs:seeAlso")
                :inverse t
-               :as "public-service"))
+               :as "public-service")
+              (procedure :via ,(s-prefix "ipdc:hasWebsite")
+               :inverse t
+               :as "procedure"))
   :resource-base (s-url "http://lblod.data.gift/websites/")
   :on-path "websites")
+
+(define-resource procedure ()
+  :class (s-prefix "cpsv:Rule")
+  :properties `((:title :language-string-set ,(s-prefix "dct:title"))
+                 (:description :language-string-set ,(s-prefix "dct:description")))
+  :has-one `((public-service :via ,(s-prefix "cpsv:follows")
+               :inverse t
+               :as "public-service"))
+  :has-many `((website :via ,(s-prefix "ipdc:hasWebsite")
+                 :as "websites"))
+  :resource-base (s-url "http://lblod.data.gift/procedures/")
+  :on-path "procedures")
