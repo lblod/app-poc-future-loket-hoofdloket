@@ -138,7 +138,7 @@ services:
     labels:
       - "logging=true"
   ipdc-ldes-consumer:
-    image: redpencil/ldes-consumer:0.12.0
+    image: redpencil/ldes-consumer:0.12.1
     volumes:
       - ./data/ldes-consumer:/data
     environment:
